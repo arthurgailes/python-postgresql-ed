@@ -1,47 +1,36 @@
 student_list = []
 
-student = {"name": "Jose",
-           "marks":[70,50,80,44,99],
-           "exams": {
-               "final": 70,
-               "midterm": 50
-           }}
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.marks = []
+
+    def average_mark(self):
+        if len(self.marks) == 0:
+            return 0
+        else:
+            # Add together all of the student['marks']
+            total = sum(self.marks)
+            # Divide them by the total number of marks
+            average_mark = total / len(self.marks)
+
+            return average_mark
 
 
 def create_student():
-    # Ask the user for the student's name
     name = input("What is your name? ")
-    #Create the dictionary in the format {'name', '<student_name>', 'marks': []}
-    student_data = {
-        "name": name,
-        "marks": []
-    }
-    #Return that dictionary
+    student_data = Student(name)
+
     return student_data
 
 def add_mark(student, mark):
     #Append a mark to the student dictionary
-    student['marks'].append(mark)
-
-#s=create_student()
-
-#print(s)
-
-def calculate_average_mark(student):
-    # What happens if the student has no marks yet?
-    if len(student["marks"]) == 0:
-        return 0
-    else:
-        # Add together all of the student['marks']
-        total = sum(student["marks"])
-        # Divide them by the total number of marks
-        average_mark = total/len(student["marks"])
-
-        return average_mark
+    student.marks.append(mark)
 
 def print_student_details(student):
     #print out a string that tells the user important information about this student
-    print("{}, average mark: {}".format(student["name"],calculate_average_mark(student)))
+    print("{}, average mark: {}".format(student.name,
+                                        student.average_mark()))
 
 def print_student_list(list):
     for i, student in enumerate(list):
